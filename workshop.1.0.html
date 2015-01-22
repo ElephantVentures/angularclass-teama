@@ -33,7 +33,11 @@ td {
 td:nth-child(2n) {
   font-style: italic;
 }
+input {
+  vertical-align: top;
+}
 input[type=text] {
+  width: 250px;
   height: 24px;
   font-size: 16px;
   border: 1px solid #800000;
@@ -49,6 +53,11 @@ input[type=submit] {
   border: 1px solid #800000;
   color: #a0522d;
   background-color: #ffe4c4;
+}
+input[type=submit]:disabled {
+  color: #fff8dc;
+  border-color: #fff8dc;
+  cursor: not-allowed;
 }
 .wrapper {
   width: 60%;
