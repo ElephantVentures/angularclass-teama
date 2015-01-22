@@ -10,6 +10,7 @@
   <h1>Food Monkey Blog (powered by AngularJS)</h1>
 
   <h2>Our current menu:</h2>
+
   <table border="1" cellpadding="4">
     <thead>
       <tr>
@@ -26,39 +27,25 @@
   </table>
 
   <h3>Suggest dishes for our menu:</h3>
+
   <form name="newDishes" ng-submit="ctrl.addDish()">
     <input type="text"
            placeholder="Enter a dish name"
            name="dishToAdd"
            ng-model="ctrl.newDish.label"
            required />
+
     <input type="text"
            placeholder="Enter the dish's ingredients"
            name="ingredientsToAdd"
-           ng-model="ctrl.newDish.ingredients"
-           required />
+           ng-model="ctrl.newDish.ingredients" />
+
     <input type="submit"
            value="Add"
            ng-disabled="newDishes.$invalid" />
   </form>
 
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.js"></script>
-  <script type="text/javascript">
-    angular.module('foodMonkeyApp', [])
-      .controller('MonkeyCtrl', [function() {
-        var self = this;
-        // method to add new entries to the model
-        self.addDish = function() {
-          self.newDish.id = self.dishes.length + 1;
-          self.dishes.push(self.newDish);
-          self.newDish = null;
-        };
-        // default data model
-        self.dishes = [
-          {id: 1, label: 'Omelette', ingredients: 'eggs, bacon, cheese, peppers'},
-          {id: 2, label: 'Fruit salad', ingredients: 'melon, papaya, kiwi, grapes'}
-        ];
-      }]);
-  </script>
+  <script src="scripts/MonkeyCtrl.js"></script>
 </body>
 </html>
