@@ -3,21 +3,24 @@ angular.module('foodMonkeyApp', [])
     var self = this;
     // method to add new entries to the model
     self.dishes = [];
-
-	$http.get('/api/dish').then(function(response){
+	self.newDish = {};	
+	var fetchDishes = function() {
+	return $http.get('/api/dish').then(function(response){
 		self.dishes = response.data;
 	}, function(errResponse){
 		console.error('Error while fetching dishes');	
 	});
-
+	};
+	
+	fetchDishes();
 
     self.addDish = function() {
-      DishService.addDish({
-	  id: self.listDishes().length + 1,
-	  label: self.newDish.label,
-	  ingredients: self.newDish.ingredients
-      });
-	self.newDish = null;
+      $http.post('/api/dish',self.newDish)
+	.then(fetchDishes)
+	.then(function(response){
+		self.newDish = {};	
+	});
+
     };
 
 
