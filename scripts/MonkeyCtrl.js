@@ -1,15 +1,29 @@
 angular.module('foodMonkeyApp', [])
-  .controller('MonkeyCtrl', [function() {
+  .controller('MonkeyCtrl', ['DishService',function(DishService) {
     var self = this;
     // method to add new entries to the model
-    self.addDish = function() {
-      self.newDish.id = self.dishes.length + 1;
-      self.dishes.push(self.newDish);
-      self.newDish = null;
+    self.listDishes = function() {
+	return DishService.listDishes();
     };
-    // default data model
-    self.dishes = [
-      {id: 1, label: 'Omelette', ingredients: 'eggs, bacon, cheese, peppers'},
-      {id: 2, label: 'Fruit salad', ingredients: 'melon, papaya, kiwi, grapes'}
+    self.addDish = function() {
+      DishService.addDish({
+	  id: self.listDishes().length + 1,
+	  label: newDish.label
+      });
+    };
+  }])
+.factory('DishService', [function() {
+    var dishes = [
+	{id: 1, label: 'Omelette', ingredients: 'eggs, bacon, cheese, peppers'},
+	{id: 2, label: 'Fruit salad', ingredients: 'melon, papaya, kiwi, grapes'}	
     ];
-  }]);
+
+    return {
+	listDishes: function() {
+	    return dishes;
+	},
+	addDish: function(dish) {
+	    dishes.push(dish);
+	}
+    };
+}]);

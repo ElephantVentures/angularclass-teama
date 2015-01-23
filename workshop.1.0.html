@@ -80,7 +80,7 @@ input[type=submit]:disabled {
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="dish in ctrl.dishes">
+        <tr ng-repeat="dish in ctrl.listDishes()">
           <td ng-bind="dish.label"></td>
           <td ng-bind="dish.ingredients"></td>
         </tr>
