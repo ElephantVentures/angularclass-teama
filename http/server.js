@@ -13,46 +13,42 @@ app.use(methodOverride()); 					// simulate DELETE and PUT
 
 var router = express.Router();
 
-var notes = [
-  {id: 1, label: 'First Note', author: 'Art'},
-  {id: 2, label: 'Second Note', author: 'Danny'},
-  {id: 3, label: 'Middle Note', author: 'Nancy'},
-  {id: 4, label: 'Last Note', author: 'Dave'},
-  {id: 5, label: 'Really the last Note', author: 'Polo'}
-
+var dishes = [
+	{id: 1, label: 'Omelette', ingredients: 'eggs, bacon, cheese, peppers'},
+	{id: 2, label: 'Fruit salad', ingredients: 'melon, papaya, kiwi, grapes'}	
 ];
 var lastId = 6;
 
-router.get('/note', function(req, res) {
-  res.send(notes);
+router.get('/dish', function(req, res) {
+  res.send(dishes);
 });
-router.post('/note', function(req, res) {
-  var note = req.body;
-  note.id = lastId;
+router.post('/dish', function(req, res) {
+  var dish = req.body;
+  dish.id = lastId;
   lastId++;
-  notes.push(note);
-  res.send(note);
+  dishes.push(dish);
+  res.send(dish);
 });
 
-router.get('/note/:id', function(req, res) {
-  for (var i = 0; i < notes.length; i++) {
-    if (notes[i].id == req.params.id) {
-      res.send(notes[i]);
+router.get('/dish/:id', function(req, res) {
+  for (var i = 0; i < dishes.length; i++) {
+    if (dishes[i].id == req.params.id) {
+      res.send(dishes[i]);
       break;
     }
   }
-  res.send({msg: 'Note not found'}, 404);
+  res.send({msg: 'dish not found'}, 404);
 });
-router.post('/note/:id', function(req, res) {
-  for (var i = 0; i < notes.length; i++) {
-    if (notes[i].id == req.params.id) {
-      notes[i] = req.body;
-      notes[i].id = req.params.id;
-      res.send(notes[i]);
+router.post('/dish/:id', function(req, res) {
+  for (var i = 0; i < dishes.length; i++) {
+    if (dishes[i].id == req.params.id) {
+      dishes[i] = req.body;
+      dishes[i].id = req.params.id;
+      res.send(dishes[i]);
       break;
     }
   }
-  res.send({msg: 'Note not found'}, 404);
+  res.send({msg: 'dish not found'}, 404);
 });
 
 router.post('/login', function(req, res) {

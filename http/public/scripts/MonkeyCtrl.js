@@ -1,10 +1,16 @@
 angular.module('foodMonkeyApp', [])
-  .controller('MonkeyCtrl', ['DishService',function(DishService) {
+  .controller('MonkeyCtrl', ['$http',function($http) {
     var self = this;
     // method to add new entries to the model
-    self.listDishes = function() {
-	return DishService.listDishes();
-    };
+    self.dishes = [];
+
+	$http.get('/api/dish').then(function(response){
+		self.dishes = response.data;
+	}, function(errResponse){
+		console.error('Error while fetching dishes');	
+	});
+
+
     self.addDish = function() {
       DishService.addDish({
 	  id: self.listDishes().length + 1,
@@ -13,7 +19,9 @@ angular.module('foodMonkeyApp', [])
       });
 	self.newDish = null;
     };
-  }])
+
+
+/*  }])
 .factory('DishService', [function() {
     var dishes = [
 	{id: 1, label: 'Omelette', ingredients: 'eggs, bacon, cheese, peppers'},
@@ -27,5 +35,7 @@ angular.module('foodMonkeyApp', [])
 	addDish: function(dish) {
 	    dishes.push(dish);
 	}
-    };
+    };*/
+
+
 }]);
