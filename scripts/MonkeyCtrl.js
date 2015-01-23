@@ -1,10 +1,10 @@
 angular.module('foodMonkeyApp', [])
   .controller('MonkeyCtrl', ['DishService',function(DishService) {
     var self = this;
+
     // method to add new entries to the model
-    self.listDishes = function() {
-	return DishService.listDishes();
-    };
+self.listDishes = DishService.listDishes;
+
     self.addDish = function() {
       DishService.addDish({
 	  id: self.listDishes().length + 1,
