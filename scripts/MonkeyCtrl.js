@@ -8,8 +8,10 @@ angular.module('foodMonkeyApp', [])
     self.addDish = function() {
       DishService.addDish({
 	  id: self.listDishes().length + 1,
-	  label: newDish.label
+	  label: self.newDish.label,
+	  ingredients: self.newDish.ingredients
       });
+	self.newDish = null;
     };
   }])
 .factory('DishService', [function() {
